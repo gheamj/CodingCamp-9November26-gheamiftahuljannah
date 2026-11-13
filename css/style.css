@@ -1,0 +1,271 @@
+/* ============================================================
+   Bloom by Ghea -- Expense & Budget Visualizer
+   css/style.css
+   ============================================================ */
+
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+/* ============================================================
+   THEME TOKENS
+   ============================================================ */
+:root,
+body.light {
+  --color-bg:           #FDF6F2;
+  --color-card-bg:      #FFFFFF;
+  --color-card-border:  #F5E1DA;
+  --color-accent:       #E28588;
+  --color-accent-hover: #D36E72;
+  --color-text:         #3D2C2C;
+  --color-sage:         #9CAF88;
+  --color-gold:         #C9A25B;
+  --color-warning:      #E05555;
+  --color-error:        #C0392B;
+  --shadow-card:        0 6px 20px rgba(226,149,152,0.12);
+}
+
+body.dark {
+  --color-bg:           #1F191A;
+  --color-card-bg:      #2B2224;
+  --color-card-border:  #3D2C2C;
+  --color-accent:       #E89B9E;
+  --color-accent-hover: #D36E72;
+  --color-text:         #F9ECE8;
+  --color-sage:         #9CAF88;
+  --color-gold:         #C9A25B;
+  --color-warning:      #FF7070;
+  --color-error:        #FF8080;
+  --shadow-card:        0 6px 20px rgba(0,0,0,0.35);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ============================================================
+   LAYOUT WRAPPERS
+   ============================================================ */
+header, #summary-card, #add-transaction, .grid-layout, #storage-warning-banner {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  gap: 1rem;
+}
+.header-brand { display: flex; align-items: center; gap: 0.875rem; }
+.logo-badge {
+  width: 56px; height: 56px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+.header-text h1 { font-family: 'Quicksand', sans-serif; font-size: 1.375rem; font-weight: 700; line-height: 1.25; }
+.header-text .subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8125rem; color: var(--color-gold); }
+
+/* ============================================================
+   THEME TOGGLE
+   ============================================================ */
+#theme-toggle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.875rem; font-weight: 600;
+  background: var(--color-card-bg); color: var(--color-text);
+  border: 1.5px solid var(--color-card-border);
+  border-radius: 50px; padding: 0.4rem 1.1rem;
+  cursor: pointer; white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+#theme-toggle:hover, #theme-toggle:focus-visible {
+  background: var(--color-accent); color: #fff;
+  border-color: var(--color-accent); outline: none;
+}
+
+/* ============================================================
+   CARD BASE
+   ============================================================ */
+#summary-card, #add-transaction, #transaction-list-card, #pie-chart-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  padding: 1.75rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+#add-transaction { margin-top: 1.5rem; }
+
+/* ============================================================
+   SUMMARY CARD
+   ============================================================ */
+.summary-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.summary-item { flex: 1 1 160px; }
+.summary-label {
+  font-size: 0.8125rem; font-weight: 500; color: var(--color-gold);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.25rem;
+}
+.summary-value {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.75rem; font-weight: 700; color: var(--color-accent);
+}
+.budget-limit-row { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 1.25rem; }
+.budget-label { font-size: 0.875rem; font-weight: 600; color: var(--color-gold); }
+#budget-limit-input {
+  width: 100%; max-width: 320px;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--color-card-border); border-radius: 10px;
+  background: var(--color-bg); color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem;
+  transition: border-color 0.2s;
+}
+#budget-limit-input:focus { outline: none; border-color: var(--color-accent); }
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+.progress-bar-wrapper { margin-top: 0.5rem; }
+#progress-bar-track {
+  width: 100%; height: 12px;
+  background: var(--color-card-border); border-radius: 100px; overflow: hidden;
+}
+#progress-bar-fill {
+  height: 100%; width: 0%;
+  background: var(--color-accent); border-radius: 100px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+#progress-bar-fill.over-budget { background: var(--color-warning); }
+.warning-msg { margin-top: 0.5rem; font-size: 0.8125rem; font-weight: 600; color: var(--color-warning); }
+
+/* ============================================================
+   ADD TRANSACTION FORM
+   ============================================================ */
+#add-transaction h2 { margin-bottom: 1.25rem; font-size: 1.125rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.form-group label { font-size: 0.875rem; font-weight: 600; }
+#transaction-form input, #transaction-form select {
+  width: 100%; padding: 0.55rem 0.75rem;
+  border: 1.5px solid var(--color-card-border); border-radius: 10px;
+  background: var(--color-bg); color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem;
+  transition: border-color 0.2s;
+}
+#transaction-form input:focus, #transaction-form select:focus { outline: none; border-color: var(--color-accent); }
+#add-transaction-btn {
+  width: 100%; padding: 0.65rem;
+  background: var(--color-accent); color: #fff;
+  border: none; border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 600;
+  cursor: pointer; margin-top: 0.25rem; transition: background-color 0.2s;
+}
+#add-transaction-btn:hover, #add-transaction-btn:focus-visible { background: var(--color-accent-hover); outline: none; }
+.error-msg { font-size: 0.8rem; color: var(--color-error); min-height: 1rem; display: block; }
+
+/* ============================================================
+   CUSTOM CATEGORY
+   ============================================================ */
+#custom-category-control {
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--color-card-border);
+}
+#custom-category-control h3 { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+.custom-cat-row { display: flex; gap: 0.625rem; }
+#custom-cat-input {
+  flex: 1; padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--color-card-border); border-radius: 10px;
+  background: var(--color-bg); color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9375rem;
+  transition: border-color 0.2s;
+}
+#custom-cat-input:focus { outline: none; border-color: var(--color-accent); }
+#add-category-btn {
+  padding: 0.5rem 1rem;
+  background: var(--color-sage); color: #fff;
+  border: none; border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9375rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
+}
+#add-category-btn:hover, #add-category-btn:focus-visible { opacity: 0.85; outline: none; }
+
+/* ============================================================
+   BOTTOM GRID
+   ============================================================ */
+.grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+#transaction-list-card h2, #pie-chart-card h2 { font-size: 1.125rem; margin-bottom: 1rem; }
+
+/* ============================================================
+   TRANSACTION LIST
+   ============================================================ */
+#transaction-list { list-style: none; max-height: 400px; overflow-y: auto; padding-right: 0.25rem; }
+#transaction-list::-webkit-scrollbar { width: 5px; }
+#transaction-list::-webkit-scrollbar-thumb { background: var(--color-card-border); border-radius: 100px; }
+.tx-item {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.75rem; padding: 0.65rem 0;
+  border-bottom: 1px solid var(--color-card-border);
+}
+.tx-item:last-child { border-bottom: none; }
+.tx-left { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; min-width: 0; }
+.tx-name { font-weight: 600; font-size: 0.9375rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tx-amount { font-family: 'Quicksand', sans-serif; font-size: 0.875rem; color: var(--color-accent); font-weight: 600; }
+.category-badge { font-size: 0.75rem; font-weight: 600; color: #fff; padding: 0.2rem 0.6rem; border-radius: 50px; white-space: nowrap; }
+.delete-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 1rem; color: var(--color-error);
+  padding: 0.25rem; border-radius: 6px; transition: background 0.15s; flex-shrink: 0;
+}
+.delete-btn:hover, .delete-btn:focus-visible { background: rgba(192,57,43,0.1); outline: none; }
+.empty-state { font-size: 0.875rem; color: var(--color-gold); text-align: center; padding: 1.5rem 0; }
+
+/* ============================================================
+   PIE CHART
+   ============================================================ */
+#pie-chart-canvas { display: block; max-height: 320px; width: 100% !important; }
+
+/* ============================================================
+   STORAGE BANNER
+   ============================================================ */
+.storage-banner {
+  max-width: 1100px; margin: 1rem auto 0;
+  padding: 0.75rem 1.25rem;
+  background: #fff3cd; border: 1px solid #ffc107; border-radius: 10px;
+  color: #856404; font-size: 0.875rem; font-weight: 600;
+}
+body.dark .storage-banner { background: #3a2e00; border-color: #c9a25b; color: #ffd97d; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .grid-layout { grid-template-columns: 1fr; }
+  .summary-row { flex-direction: column; gap: 1rem; }
+  header { flex-wrap: wrap; }
+  .summary-value { font-size: 1.375rem; }
+}
